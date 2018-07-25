@@ -93,6 +93,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        {console.log('this.state.posts', this.state.posts)}
         <Header listTitle={this.state.listTitle} />
         {this.state.isOwner && (
           <LinkForm
