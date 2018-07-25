@@ -6,6 +6,7 @@ import Header from './components/Header';
 import fileContents from './utils/fileContents';
 import { v4 } from 'uuid';
 import NoPosts from './components/NoPosts';
+import { arch } from 'os';
 
 class App extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class App extends Component {
 
     posts.map(async post => {
       // wow what a hack
-      if (post !== '.DS_Store') {
+      if (post !== '.DS_Store' && !this.state.posts.includes(post.postId)) {
         const postItem = await archive.readFile(`/posts/${post}`);
         let myPosts = this.state.posts;
         myPosts.push(JSON.parse(postItem));
@@ -75,10 +76,15 @@ class App extends Component {
       fileContents(linkField, textareaField, newPostId)
     );
 
-    this.setState({
-      textareaField: '',
-      linkField: ''
-    });
+    this.setState(
+      {
+        textareaField: '',
+        linkField: ''
+      },
+      () => {
+        this.getPosts(archive);
+      }
+    );
   };
 
   deleteLink = async postId => {
