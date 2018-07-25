@@ -6,7 +6,6 @@ import Header from './components/Header';
 import fileContents from './utils/fileContents';
 import { v4 } from 'uuid';
 import NoPosts from './components/NoPosts';
-import { arch } from 'os';
 
 class App extends Component {
   constructor(props) {
