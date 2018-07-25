@@ -22,7 +22,6 @@ class App extends Component {
   async componentDidMount() {
     const archive = await new global.DatArchive(DAT_URL);
     const archiveInfo = await archive.getInfo();
-    console.log('info', archiveInfo);
     this.getPosts(archive);
     this.setInfo(archiveInfo);
   }
@@ -87,7 +86,6 @@ class App extends Component {
   };
 
   deleteLink = async postId => {
-    console.log('deleting', postId);
     const archive = await new global.DatArchive(DAT_URL);
     await archive.unlink(`/posts/${postId}.json`);
   };
@@ -95,7 +93,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        {console.log(this.state.posts)}
         <Header listTitle={this.state.listTitle} />
         {this.state.isOwner && (
           <LinkForm
