@@ -31,8 +31,7 @@ class App extends Component {
     posts.map(async post => {
       if (post !== '.DS_Store') {
         const postItem = await archive.readFile(`/posts/${post}`);
-        await console.log('postItem', JSON.parse(postItem).postId);
-        let myPosts = this.state.posts;
+        const myPosts = this.state.posts;
 
         const statePostIds = myPosts.map(x => x.postId);
         if (statePostIds.includes(JSON.parse(postItem).postId)) {
