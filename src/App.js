@@ -28,16 +28,21 @@ class App extends Component {
 
   getPosts = async archive => {
     const posts = await archive.readdir('/posts');
-
     posts.map(async post => {
-      // wow what a hack
-      if (post !== '.DS_Store' && !this.state.posts.includes(post.postId)) {
+      if (post !== '.DS_Store') {
         const postItem = await archive.readFile(`/posts/${post}`);
+        await console.log('postItem', JSON.parse(postItem).postId);
         let myPosts = this.state.posts;
-        myPosts.push(JSON.parse(postItem));
-        this.setState({
-          posts: myPosts
-        });
+
+        const statePostIds = myPosts.map(x => x.postId);
+        if (statePostIds.includes(JSON.parse(postItem).postId)) {
+          return;
+        } else {
+          myPosts.push(JSON.parse(postItem));
+          this.setState({
+            posts: myPosts
+          });
+        }
       }
     });
   };
@@ -74,15 +79,11 @@ class App extends Component {
       fileContents(linkField, textareaField, newPostId)
     );
 
-    this.setState(
-      {
-        textareaField: '',
-        linkField: ''
-      },
-      () => {
-        this.getPosts(archive);
-      }
-    );
+    this.setState({
+      textareaField: '',
+      linkField: ''
+    });
+    this.getPosts(archive);
   };
 
   deleteLink = async postId => {
