@@ -29,6 +29,8 @@ class App extends Component {
   getPosts = async archive => {
     // read posts directory, returns array of file names
     const posts = await archive.readdir('/posts');
+    console.log('posts right now', posts);
+    console.log('this.state.posts in getPosts', this.state.posts);
     posts.map(async post => {
       // dumb thing because ds_store wasnt ignored
       if (post !== '.DS_Store') {
@@ -51,6 +53,18 @@ class App extends Component {
           });
         }
       }
+    });
+  };
+
+  refreshPosts = async archive => {
+    let newPosts = [];
+    const posts = await archive.readdir('/posts');
+    posts.map(async post => {
+      const postItem = await archive.readFile(`/posts/${post}`);
+      newPosts.push(JSON.parse(postItem));
+      this.setState({
+        posts: newPosts
+      });
     });
   };
 
@@ -96,6 +110,7 @@ class App extends Component {
   deleteLink = async postId => {
     const archive = await new global.DatArchive(DAT_URL);
     await archive.unlink(`/posts/${postId}.json`);
+    await this.refreshPosts(archive);
   };
 
   render() {
