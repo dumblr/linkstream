@@ -48,18 +48,11 @@ class App extends Component {
   };
 
   setInfo = archiveInfo => {
-    if (archiveInfo.isOwner) {
-      this.setState({
-        isOwner: true,
-        listTitle: archiveInfo.title,
-        listDescription: archiveInfo.description
-      });
-    } else {
-      this.setState({
-        listTitle: archiveInfo.title,
-        listDescription: archiveInfo.description
-      });
-    }
+    this.setState({
+      ...(archiveInfo.isOwner && { isOwner: true }),
+      listTitle: archiveInfo.title,
+      listDescription: archiveInfo.description
+    });
   };
 
   fieldChange = (e, str) => {
