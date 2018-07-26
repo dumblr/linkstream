@@ -17,9 +17,10 @@ const Headline = styled.h1`
   margin: 0;
 `;
 
-const Header = ({ listTitle }) => (
+const Header = ({ listTitle, listDescription }) => (
   <Wrapper>
     <Headline>{listTitle || 'linkstream'}</Headline>
+    {listDescription && <Headline>{listDescription}</Headline>}
     <Title>
       linkstream is a place to save links during meetups, working sessions, or
       talks. Built on dat.
