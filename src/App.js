@@ -27,17 +27,25 @@ class App extends Component {
   }
 
   getPosts = async archive => {
+    // read posts directory, returns array of file names
     const posts = await archive.readdir('/posts');
     posts.map(async post => {
+      // dumb thing because ds_store wasnt ignored
       if (post !== '.DS_Store') {
+        // read the file
         const postItem = await archive.readFile(`/posts/${post}`);
+        // get our state
         const myPosts = this.state.posts;
-
+        // get all of the postId's from our state
         const statePostIds = myPosts.map(x => x.postId);
+        // if this file is already in the state
         if (statePostIds.includes(JSON.parse(postItem).postId)) {
+          // don't do anything
           return;
         } else {
+          // otherwise, add it to the state object
           myPosts.push(JSON.parse(postItem));
+          // set some new state
           this.setState({
             posts: myPosts
           });
