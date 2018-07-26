@@ -27,38 +27,32 @@ class App extends Component {
   }
 
   refreshPosts = async archive => {
-    let newPosts = [];
     const posts = await archive.readdir('/posts');
     if (posts.length === 0) {
       this.setState({
         posts: []
       });
     } else {
-      posts.map(async post => {
-        if (post !== '.DS_Store') {
-          const postItem = await archive.readFile(`/posts/${post}`);
-          newPosts.push(JSON.parse(postItem));
-          this.setState({
-            posts: newPosts
-          });
-        }
+      const promises = posts.map(async post => {
+        // if (post !== ".DS_Store") {
+        const postResponse = await archive.readFile(`/posts/${post}`);
+        return JSON.parse(postResponse);
+        // }
+      });
+
+      const results = await Promise.all(promises);
+      this.setState({
+        posts: results
       });
     }
   };
 
   setInfo = archiveInfo => {
-    if (archiveInfo.isOwner) {
-      this.setState({
-        isOwner: true,
-        listTitle: archiveInfo.title,
-        listDescription: archiveInfo.description
-      });
-    } else {
-      this.setState({
-        listTitle: archiveInfo.title,
-        listDescription: archiveInfo.description
-      });
-    }
+    this.setState({
+      ...(archiveInfo.isOwner && { isOwner: true }),
+      listTitle: archiveInfo.title,
+      listDescription: archiveInfo.description
+    });
   };
 
   fieldChange = (e, str) => {
@@ -88,7 +82,6 @@ class App extends Component {
   };
 
   deleteLink = async postId => {
-    console.log('delete link');
     const archive = await new global.DatArchive(DAT_URL);
     await archive.unlink(`/posts/${postId}.json`);
     this.refreshPosts(archive);
@@ -97,7 +90,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        {console.log('rerender, this.state.posts', this.state.posts)}
         <Header
           listTitle={this.state.listTitle}
           listDescription={this.state.listDescription}
