@@ -27,21 +27,22 @@ class App extends Component {
   }
 
   refreshPosts = async archive => {
-    let newPosts = [];
     const posts = await archive.readdir('/posts');
     if (posts.length === 0) {
       this.setState({
         posts: []
       });
     } else {
-      posts.map(async post => {
-        if (post !== '.DS_Store') {
-          const postItem = await archive.readFile(`/posts/${post}`);
-          newPosts.push(JSON.parse(postItem));
-          this.setState({
-            posts: newPosts
-          });
-        }
+      const promises = posts.map(async post => {
+        // if (post !== ".DS_Store") {
+        const postResponse = await archive.readFile(`/posts/${post}`);
+        return JSON.parse(postResponse);
+        // }
+      });
+
+      const results = await Promise.all(promises);
+      this.setState({
+        posts: results
       });
     }
   };
