@@ -13,7 +13,7 @@ const LinkList = ({ links, isOwner, deleteFn }) => (
     {links.map((link, i) => (
       <EachListItem key={i}>
         <LinkTitle>
-          <LinkTag href={link.titleContent}>{link.titleContent}</LinkTag>
+          <LinkTag href={`//${link.titleContent}`}>{link.titleContent}</LinkTag>
         </LinkTitle>
         <LinkDescription>{link.textContent}</LinkDescription>
         {isOwner && (
