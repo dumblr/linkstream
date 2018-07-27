@@ -10,12 +10,11 @@ const Text = styled.h6`
   font-size: 14px;
   line-height: 16px;
   margin: 0;
-  font-weight: normal;
 `;
 
 const NoPosts = () => (
   <Wrapper>
-    <Text>~~~no posts yet~~~</Text>
+    <Text>Nothing to see here...</Text>
   </Wrapper>
 );
 

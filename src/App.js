@@ -6,6 +6,12 @@ import Header from './components/Header';
 import fileContents from './utils/fileContents';
 import { v4 } from 'uuid';
 import NoPosts from './components/NoPosts';
+import LinkBack from './components/LinkBack';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  padding-top: 35px;
+`;
 
 class App extends Component {
   constructor(props) {
@@ -89,7 +95,8 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <Wrapper>
+        <LinkBack />
         <Header
           listTitle={this.state.listTitle}
           listDescription={this.state.listDescription}
@@ -112,7 +119,7 @@ class App extends Component {
         ) : (
           <NoPosts />
         )}
-      </div>
+      </Wrapper>
     );
   }
 }
