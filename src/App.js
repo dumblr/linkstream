@@ -8,6 +8,7 @@ import { v4 } from 'uuid';
 import NoPosts from './components/NoPosts';
 import LinkBack from './components/LinkBack';
 import styled from 'styled-components';
+import DatPopup from './components/DatPopup';
 
 const Wrapper = styled.div`
   padding-top: 35px;
@@ -119,6 +120,7 @@ class App extends Component {
         ) : (
           <NoPosts />
         )}
+        {this.state.isHttp && <DatPopup />}
       </Wrapper>
     );
   }

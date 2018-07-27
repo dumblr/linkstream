@@ -1,18 +1,22 @@
 import React from 'react';
+import { Wrapper, Title, List, ListItem } from './styles';
 
 const DatPopup = () => (
-  <div>
-    <h2>
+  <Wrapper>
+    <Title>
       This site is intended to be viewed and experience with Beaker Browser.
-    </h2>
-    <ul>
-      <li>Fork this site to create your own linkstream.</li>
-      <li>
+    </Title>
+    <List>
+      <ListItem>Fork this site to create your own linkstream.</ListItem>
+      <ListItem>
         Your title and description will replace the title and description at the
         top of the site.
-      </li>
-    </ul>
-  </div>
+      </ListItem>
+      <ListItem>
+        You'll be able to see a form to create and edit links.
+      </ListItem>
+    </List>
+  </Wrapper>
 );
 
 export default DatPopup;
