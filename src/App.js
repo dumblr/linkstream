@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { DAT_URL } from './config';
 import LinkForm from './components/LinkForm';
 import LinkList from './components/LinkList';
 import Header from './components/Header';
@@ -9,6 +8,7 @@ import NoPosts from './components/NoPosts';
 import LinkBack from './components/LinkBack';
 import styled from 'styled-components';
 import DatPopup from './components/DatPopup';
+import urlEnv from './utils/urlEnv';
 
 const Wrapper = styled.div`
   padding-top: 35px;
@@ -22,12 +22,13 @@ class App extends Component {
       linkField: '',
       textareaField: '',
       isOwner: false,
-      listTitle: ''
+      listTitle: '',
+      isHttp: true
     };
   }
 
   async componentDidMount() {
-    const archive = await new global.DatArchive(DAT_URL);
+    const archive = await new global.DatArchive(urlEnv());
     const archiveInfo = await archive.getInfo();
     this.refreshPosts(archive);
     this.setInfo(archiveInfo);
@@ -75,7 +76,7 @@ class App extends Component {
 
   writePost = async (linkField, textareaField) => {
     const newPostId = await v4();
-    const archive = await new global.DatArchive(DAT_URL);
+    const archive = await new global.DatArchive(urlEnv());
     await archive.writeFile(
       `/posts/${newPostId}.json`,
       fileContents(linkField, textareaField, newPostId)
@@ -89,12 +90,13 @@ class App extends Component {
   };
 
   deleteLink = async postId => {
-    const archive = await new global.DatArchive(DAT_URL);
+    const archive = await new global.DatArchive(urlEnv());
     await archive.unlink(`/posts/${postId}.json`);
     this.refreshPosts(archive);
   };
 
   render() {
+    console.log(process.env);
     return (
       <Wrapper>
         <LinkBack />

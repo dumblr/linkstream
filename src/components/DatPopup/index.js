@@ -15,6 +15,7 @@ const DatPopup = () => (
       <ListItem>
         You'll be able to see a form to create and edit links.
       </ListItem>
+      <ListItem>Questions? Issues? </ListItem>
     </List>
   </Wrapper>
 );
