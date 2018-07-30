@@ -9,6 +9,7 @@ import LinkBack from './components/LinkBack';
 import styled from 'styled-components';
 import DatPopup from './components/DatPopup';
 import urlEnv from './utils/urlEnv';
+import sortBy from 'lodash.sortby';
 
 const Wrapper = styled.div`
   padding-top: 35px;
@@ -23,7 +24,7 @@ class App extends Component {
       textareaField: '',
       isOwner: false,
       listTitle: '',
-      isHttp: true
+      infoViewable: false
     };
   }
 
@@ -69,6 +70,12 @@ class App extends Component {
     });
   };
 
+  fieldFlip = str => {
+    this.setState({
+      [str]: !this.state[str]
+    });
+  };
+
   formSubmit = e => {
     e.preventDefault();
     this.writePost(this.state.linkField, this.state.textareaField);
@@ -96,10 +103,10 @@ class App extends Component {
   };
 
   render() {
-    console.log(process.env);
+    const sortedPosts = sortBy(this.state.posts, ['createdAt']).reverse();
     return (
       <Wrapper>
-        <LinkBack />
+        <LinkBack clickFn={this.fieldFlip} />
         <Header
           listTitle={this.state.listTitle}
           listDescription={this.state.listDescription}
@@ -115,14 +122,14 @@ class App extends Component {
 
         {this.state.posts.length ? (
           <LinkList
-            links={this.state.posts}
+            links={sortedPosts}
             isOwner={this.state.isOwner}
             deleteFn={this.deleteLink}
           />
         ) : (
           <NoPosts />
         )}
-        {this.state.isHttp && <DatPopup />}
+        {this.state.infoViewable && <DatPopup />}
       </Wrapper>
     );
   }
