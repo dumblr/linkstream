@@ -29,11 +29,28 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const archive = await new global.DatArchive(urlEnv());
-    const archiveInfo = await archive.getInfo();
-    this.refreshPosts(archive);
-    this.setInfo(archiveInfo);
+    try {
+      const archive = await new global.DatArchive(urlEnv());
+      const archiveInfo = await archive.getInfo();
+      this.refreshPosts(archive);
+      this.setInfo(archiveInfo);
+      this.datSuccess();
+    } catch (error) {
+      this.datError();
+    }
   }
+
+  datError = () => {
+    this.setState({
+      p2p: false
+    });
+  };
+
+  datSuccess = () => {
+    this.setState({
+      p2p: true
+    });
+  };
 
   refreshPosts = async archive => {
     const posts = await archive.readdir('/posts');

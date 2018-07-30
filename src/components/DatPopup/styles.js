@@ -16,6 +16,10 @@ export const Title = styled.h3`
   font-size: 14px;
   line-height: 17px;
   margin: 0 0 15px;
+
+  > a {
+    color: #000;
+  }
 `;
 
 export const List = styled.ul`
@@ -26,4 +30,8 @@ export const List = styled.ul`
 export const ListItem = styled.li`
   font-size: 12px;
   line-height: 15px;
+
+  > a {
+    color: #000;
+  }
 `;
