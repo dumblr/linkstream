@@ -33,6 +33,7 @@ export const LinkDescription = styled.p`
   font-size: 13px;
   line-height: 15px;
   margin: 0 0 10px;
+  max-width: 640px;
 `;
 
 export const LinkTime = styled.small`
