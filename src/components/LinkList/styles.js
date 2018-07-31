@@ -6,7 +6,6 @@ export const ListWrapper = styled.div`
 
 export const EachListItem = styled.div`
   padding-left: 10px;
-  border-left: 1px solid black;
   margin-bottom: 20px;
 `;
 
