@@ -10,6 +10,8 @@ import styled from 'styled-components';
 import DatPopup from './components/DatPopup';
 import urlEnv from './utils/urlEnv';
 import sortBy from 'lodash.sortby';
+import { ThemeProvider } from 'styled-components';
+import { defaultTheme, plainTheme } from './theme';
 
 const Wrapper = styled.div`
   padding-top: 35px;
@@ -24,7 +26,8 @@ class App extends Component {
       textareaField: '',
       isOwner: false,
       listTitle: '',
-      infoViewable: false
+      infoViewable: false,
+      theme: 'defaultTheme'
     };
   }
 
@@ -122,32 +125,36 @@ class App extends Component {
   render() {
     const sortedPosts = sortBy(this.state.posts, ['createdAt']).reverse();
     return (
-      <Wrapper>
-        <LinkBack clickFn={this.fieldFlip} />
-        <Header
-          listTitle={this.state.listTitle}
-          listDescription={this.state.listDescription}
-        />
-        {this.state.isOwner && (
-          <LinkForm
-            changeFn={this.fieldChange}
-            submitFn={this.formSubmit}
-            linkField={this.state.linkField}
-            textareaField={this.state.textareaField}
+      <ThemeProvider
+        theme={this.state.theme === 'defaultTheme' ? defaultTheme : plainTheme}
+      >
+        <Wrapper>
+          <LinkBack clickFn={this.fieldFlip} />
+          <Header
+            listTitle={this.state.listTitle}
+            listDescription={this.state.listDescription}
           />
-        )}
+          {this.state.isOwner && (
+            <LinkForm
+              changeFn={this.fieldChange}
+              submitFn={this.formSubmit}
+              linkField={this.state.linkField}
+              textareaField={this.state.textareaField}
+            />
+          )}
 
-        {this.state.posts.length ? (
-          <LinkList
-            links={sortedPosts}
-            isOwner={this.state.isOwner}
-            deleteFn={this.deleteLink}
-          />
-        ) : (
-          <NoPosts />
-        )}
-        {this.state.infoViewable && <DatPopup />}
-      </Wrapper>
+          {this.state.posts.length ? (
+            <LinkList
+              links={sortedPosts}
+              isOwner={this.state.isOwner}
+              deleteFn={this.deleteLink}
+            />
+          ) : (
+            <NoPosts />
+          )}
+          {this.state.infoViewable && <DatPopup />}
+        </Wrapper>
+      </ThemeProvider>
     );
   }
 }

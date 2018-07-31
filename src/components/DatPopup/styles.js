@@ -8,18 +8,12 @@ export const Wrapper = styled.div`
   top: 35px;
   right: 0;
   max-width: 300px;
-  background: radial-gradient(ellipse at top, #1bbac6, transparent),
-    radial-gradient(ellipse at bottom, #d99852, transparent);
 `;
 
 export const Title = styled.h3`
   font-size: 14px;
   line-height: 17px;
   margin: 0 0 15px;
-
-  > a {
-    color: #000;
-  }
 `;
 
 export const List = styled.ul`
@@ -30,8 +24,4 @@ export const List = styled.ul`
 export const ListItem = styled.li`
   font-size: 12px;
   line-height: 15px;
-
-  > a {
-    color: #000;
-  }
 `;
