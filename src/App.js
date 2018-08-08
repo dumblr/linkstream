@@ -11,7 +11,7 @@ import DatPopup from './components/DatPopup';
 import urlEnv from './utils/urlEnv';
 import sortBy from 'lodash.sortby';
 import { ThemeProvider } from 'styled-components';
-import { defaultTheme, plainTheme } from './theme';
+import { theme } from './theme';
 
 const Wrapper = styled.div`
   padding-top: 35px;
@@ -27,7 +27,7 @@ class App extends Component {
       isOwner: false,
       listTitle: '',
       infoViewable: false,
-      theme: 'defaultTheme'
+      theme: 'plainTheme'
     };
   }
 
@@ -122,12 +122,14 @@ class App extends Component {
     this.refreshPosts(archive);
   };
 
+  chooseTheme = () => {
+    console.log('choosing a theme');
+  };
+
   render() {
     const sortedPosts = sortBy(this.state.posts, ['createdAt']).reverse();
     return (
-      <ThemeProvider
-        theme={this.state.theme === 'defaultTheme' ? defaultTheme : plainTheme}
-      >
+      <ThemeProvider theme={theme[this.state.theme]}>
         <Wrapper>
           <LinkBack clickFn={this.fieldFlip} />
           <Header
@@ -152,7 +154,9 @@ class App extends Component {
           ) : (
             <NoPosts />
           )}
-          {this.state.infoViewable && <DatPopup />}
+          {this.state.infoViewable && (
+            <DatPopup themeState={this.state.theme} />
+          )}
         </Wrapper>
       </ThemeProvider>
     );

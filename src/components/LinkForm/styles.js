@@ -11,9 +11,12 @@ export const Form = styled.form`
 export const Input = styled.input`
   display: block;
   margin-bottom: 10px;
+  border: ${props => props.theme.INPUT_INITIAL_BORDER};
   width: 100%;
   max-width: 400px;
-  padding: 10px;
+  border-left: ${props => props.theme.INPUT_BORDER_LEFT};
+  padding: ${props => props.theme.INPUT_PADDING};
+  background: ${props => props.theme.POPUP_BACKGROUND};
 `;
 
 export const Textarea = styled.textarea`
@@ -21,10 +24,15 @@ export const Textarea = styled.textarea`
   width: 100%;
   max-width: 400px;
   min-height: 50px;
-  padding: 10px;
+  border: ${props => props.theme.INPUT_INITIAL_BORDER};
+  border-left: ${props => props.theme.INPUT_BORDER_LEFT};
+  padding: ${props => props.theme.INPUT_PADDING};
   margin-bottom: 20px;
+  background: ${props => props.theme.POPUP_BACKGROUND};
 `;
 
 export const Submit = styled.input`
   cursor: pointer;
+  border: ${props => props.theme.INPUT_BORDER_LEFT};
+  background: ${props => props.theme.POPUP_BACKGROUND};
 `;

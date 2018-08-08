@@ -1,8 +1,8 @@
 import React from 'react';
 import { Wrapper, Title, List, ListItem } from './styles';
 
-const DatPopup = () => (
-  <Wrapper>
+const DatPopup = ({ themeState }) => (
+  <Wrapper themeState={themeState}>
     <Title>
       This site is intended to be viewed and experienced with{' '}
       <a href="https://beakerbrowser.com/">Beaker Browser</a>.
