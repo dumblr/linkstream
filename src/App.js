@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import LinkForm from './components/LinkForm';
 import LinkList from './components/LinkList';
 import Header from './components/Header';
+import Helmet from 'react-helmet';
 import fileContents from './utils/fileContents';
 import { v4 } from 'uuid';
 import NoPosts from './components/NoPosts';
@@ -148,6 +149,15 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme[this.state.theme]}>
         <Wrapper>
+          <Helmet>
+            <style type="text/css">{`
+        body {
+            font-family: ${
+              this.state.theme === 'defaultTheme' ? 'sans-serif' : 'serif'
+            };
+        }
+    `}</style>
+          </Helmet>
           <LinkBack clickFn={this.fieldFlip} />
           <Header
             listTitle={this.state.listTitle}

@@ -24,7 +24,8 @@ export const theme = {
     INPUT_PADDING: '10px',
     INPUT_INITIAL_BORDER: 'none',
     INPUT_BORDER_LEFT: '1px solid black',
-    TEXT_DECORATION: 'none'
+    TEXT_DECORATION: 'none',
+    FONT_FAMILY: 'san-serif'
   },
   plainTheme: {
     LINK_COLOR: 'auto',
@@ -41,6 +42,7 @@ export const theme = {
     INPUT_PADDING: 'auto',
     INPUT_INITIAL_BORDER: 'auto',
     INPUT_BORDER_LEFT: 'auto',
-    TEXT_DECORATION: 'auto'
+    TEXT_DECORATION: 'auto',
+    FONT_FAMILY: 'serif'
   }
 };
