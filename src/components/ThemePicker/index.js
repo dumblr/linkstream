@@ -1,9 +1,10 @@
 import React from 'react';
+import { Container, Label, Input } from './styles';
 
 const ThemePicker = ({ theme, themeChangeFn }) => (
-  <div>
-    <label>
-      <input
+  <Container>
+    <Label>
+      <Input
         type="radio"
         value="defaultTheme"
         name="defaultTheme"
@@ -11,9 +12,9 @@ const ThemePicker = ({ theme, themeChangeFn }) => (
         checked={theme === 'defaultTheme'}
       />
       Default Theme
-    </label>
-    <label>
-      <input
+    </Label>
+    <Label>
+      <Input
         type="radio"
         value="plainTheme"
         name="plainTheme"
@@ -21,8 +22,8 @@ const ThemePicker = ({ theme, themeChangeFn }) => (
         checked={theme === 'plainTheme'}
       />
       Plain Theme
-    </label>
-  </div>
+    </Label>
+  </Container>
 );
 
 export default ThemePicker;

@@ -13,7 +13,6 @@ import sortBy from 'lodash.sortby';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 import themeContents from './utils/themeContents';
-import ThemePicker from './components/ThemePicker';
 
 const Wrapper = styled.div`
   padding-top: 35px;
@@ -160,11 +159,6 @@ class App extends Component {
               submitFn={this.formSubmit}
               linkField={this.state.linkField}
               textareaField={this.state.textareaField}
-            />
-          )}
-
-          {this.state.isOwner && (
-            <ThemePicker
               theme={this.state.theme}
               themeChangeFn={this.themeChange}
             />

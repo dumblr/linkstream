@@ -1,8 +1,17 @@
 import React from 'react';
 import { Form, Input, Textarea, Submit, Wrapper } from './styles';
+import ThemePicker from '../ThemePicker';
 
-const LinkForm = ({ changeFn, submitFn, linkField, textareaField }) => (
+const LinkForm = ({
+  changeFn,
+  submitFn,
+  linkField,
+  textareaField,
+  theme,
+  themeChangeFn
+}) => (
   <Wrapper>
+    <ThemePicker theme={theme} themeChangeFn={themeChangeFn} />
     <Form onSubmit={e => submitFn(e)}>
       <Input
         type="text"
