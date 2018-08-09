@@ -8,8 +8,7 @@ export const Wrapper = styled.div`
   top: 35px;
   right: 0;
   max-width: 300px;
-  background: radial-gradient(ellipse at top, #1bbac6, transparent),
-    radial-gradient(ellipse at bottom, #d99852, transparent);
+  background: ${props => props.theme.POPUP_BACKGROUND};
 `;
 
 export const Title = styled.h3`
@@ -18,7 +17,7 @@ export const Title = styled.h3`
   margin: 0 0 15px;
 
   > a {
-    color: #000;
+    color: ${props => props.theme.POPUP_LINK_COLOR};
   }
 `;
 
@@ -32,6 +31,6 @@ export const ListItem = styled.li`
   line-height: 15px;
 
   > a {
-    color: #000;
+    color: ${props => props.theme.POPUP_LINK_COLOR};
   }
 `;

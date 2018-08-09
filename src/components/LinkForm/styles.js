@@ -11,14 +11,12 @@ export const Form = styled.form`
 export const Input = styled.input`
   display: block;
   margin-bottom: 10px;
-  border: none;
+  border: ${props => props.theme.INPUT_INITIAL_BORDER};
   width: 100%;
   max-width: 400px;
-  outline: none;
-  border-left: 1px solid black;
-  padding: 10px;
-  background: radial-gradient(ellipse at top, #1bbac6, transparent),
-    radial-gradient(ellipse at bottom, #d99852, transparent);
+  border-left: ${props => props.theme.INPUT_BORDER_LEFT};
+  padding: ${props => props.theme.INPUT_PADDING};
+  background: ${props => props.theme.POPUP_BACKGROUND};
 `;
 
 export const Textarea = styled.textarea`
@@ -26,18 +24,15 @@ export const Textarea = styled.textarea`
   width: 100%;
   max-width: 400px;
   min-height: 50px;
-  border: none;
-  border-left: 1px solid black;
-  padding: 10px;
-  outline: none;
+  border: ${props => props.theme.INPUT_INITIAL_BORDER};
+  border-left: ${props => props.theme.INPUT_BORDER_LEFT};
+  padding: ${props => props.theme.INPUT_PADDING};
   margin-bottom: 20px;
-  background: radial-gradient(ellipse at top, #1bbac6, transparent),
-    radial-gradient(ellipse at bottom, #d99852, transparent);
+  background: ${props => props.theme.POPUP_BACKGROUND};
 `;
 
 export const Submit = styled.input`
   cursor: pointer;
-  border: 1px solid black;
-  background: radial-gradient(ellipse at top, #1bbac6, transparent),
-    radial-gradient(ellipse at bottom, #d99852, transparent);
+  border: ${props => props.theme.INPUT_BORDER_LEFT};
+  background: ${props => props.theme.POPUP_BACKGROUND};
 `;

@@ -6,7 +6,7 @@ export const ListWrapper = styled.div`
 
 export const EachListItem = styled.div`
   padding-left: 10px;
-  border-left: 1px solid black;
+  border-left: ${props => props.theme.INPUT_BORDER_LEFT};
   margin-bottom: 20px;
 `;
 
@@ -17,15 +17,12 @@ export const LinkTitle = styled.h1`
 `;
 
 export const LinkTag = styled.a`
-  text-decoration: none;
-  border-bottom: 2px dotted #1bbac6;
-  /* who does this anymore lol */
-  transition: all 3s ease;
-  color: #000;
-  text-decoration: none;
-
+  text-decoration: ${props => props.theme.TEXT_DECORATION};
+  border-bottom: ${props => props.theme.LINK_BORDER_STYLE};
+  transition: ${props => props.theme.LINKBACK_LINK_TRANS};
+  color: ${props => props.theme.LINK_COLOR};
   &:hover {
-    border-bottom: 2px dotted #d99852;
+    border-bottom: ${props => props.theme.LINK_BORDER_HOVER};
   }
 `;
 
@@ -44,7 +41,6 @@ export const LinkTime = styled.small`
 export const LinkDelete = styled.button`
   display: block;
   cursor: pointer;
-  border: 1px solid black;
-  background: radial-gradient(ellipse at top, #1bbac6, transparent),
-    radial-gradient(ellipse at bottom, #d99852, transparent);
+  border: ${props => props.theme.INPUT_BORDER_LEFT};
+  background: ${props => props.theme.POPUP_BACKGROUND};
 `;
