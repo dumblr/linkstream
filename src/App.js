@@ -12,6 +12,8 @@ import urlEnv from './utils/urlEnv';
 import sortBy from 'lodash.sortby';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
+import themeContents from './utils/themeContents';
+import ThemePicker from './components/ThemePicker';
 
 const Wrapper = styled.div`
   padding-top: 35px;
@@ -27,7 +29,7 @@ class App extends Component {
       isOwner: false,
       listTitle: '',
       infoViewable: false,
-      theme: 'plainTheme'
+      theme: 'defaultTheme'
     };
   }
 
@@ -37,6 +39,7 @@ class App extends Component {
       const archiveInfo = await archive.getInfo();
       this.refreshPosts(archive);
       this.setInfo(archiveInfo);
+      this.getTheme(archive);
       this.datSuccess();
     } catch (error) {
       this.datError();
@@ -45,13 +48,23 @@ class App extends Component {
 
   datError = () => {
     this.setState({
-      p2p: false
+      p2p: false,
+      theme: 'defaultTheme'
     });
   };
 
   datSuccess = () => {
     this.setState({
       p2p: true
+    });
+  };
+
+  getTheme = async archive => {
+    const themeResponse = await archive.readFile(`/theme.json`);
+    const { theme } = JSON.parse(themeResponse);
+
+    this.setState({
+      theme: theme
     });
   };
 
@@ -122,8 +135,13 @@ class App extends Component {
     this.refreshPosts(archive);
   };
 
-  chooseTheme = () => {
-    console.log('choosing a theme');
+  themeChange = async themeStr => {
+    const archive = await new global.DatArchive(urlEnv());
+    // await archive.unlink(`/theme.json`);
+    await archive.writeFile(`/theme.json`, themeContents(themeStr));
+    this.setState({
+      theme: themeStr
+    });
   };
 
   render() {
@@ -142,6 +160,13 @@ class App extends Component {
               submitFn={this.formSubmit}
               linkField={this.state.linkField}
               textareaField={this.state.textareaField}
+            />
+          )}
+
+          {this.state.isOwner && (
+            <ThemePicker
+              theme={this.state.theme}
+              themeChangeFn={this.themeChange}
             />
           )}
 
